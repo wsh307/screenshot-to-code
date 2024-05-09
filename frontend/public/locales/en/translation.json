@@ -1,0 +1,105 @@
+{
+    "app": {
+        "title": "Screenshot to Code",
+        "reset": "Reset",
+        "download": "Download",
+        "desktop": "Desktop",
+        "mobile": "Mobile",
+        "code": "Code",
+        "include_result_image": "Include screenshot of current version?",
+        "update_instruction_placeholder": "Tell the AI what to change...",
+        "update": "Update",
+        "regenerate": "Regenerate"
+    },
+    "codetab": {
+      "copy_code": "Copy Code",
+      "copied_to_clipboard": "Copied to clipboard",
+      "open_in_codepen": "Open in"
+    },
+    "imageupload": {
+      "upload_prompt": "Drag & drop a screenshot here, or click to upload",
+      "new": "New!",
+      "upload_video": "Upload a screen recording (.mp4, .mov) or record your screen to clone a whole app (experimental).",
+      "learn_more": "Learn more."
+    },
+    "importcode": {
+      "trigger_button": "Import from Code",
+      "dialog_title": "Paste in your HTML code",
+      "dialog_description": "Make sure that the code you're importing is valid HTML.",
+      "textarea_placeholder": "Paste your HTML code here...",
+      "import_button": "Import",
+      "error_empty_code": "Please paste in some code",
+      "error_select_stack": "Please select your stack"
+    },
+    "modelsettings": {
+      "ai_model": "AI Model",
+      "beta_label": "Beta"
+    },
+    "onboardingnote": {
+      "note": "To use Screenshot to Code, ",
+      "buy_credits": "buy some credits (100 generations for $36)",
+      "or_use_own_key": " or use your own OpenAI API key with GPT4 vision access.",
+      "instructions": "Follow these instructions to get yourself a key.",
+      "settings_hint": " and paste it in the Settings dialog (gear icon above). Your key is only stored in your browser. Never stored on our servers."
+    },
+    "outputsettings": {
+      "label": "Generating:",
+      "select_stack": "Select a stack",
+      "beta_label": "Beta"
+    },
+    "picobadge": {
+      "feature_requests": "Feature requests?",
+      "open_source_project": "An open source project by Pico"
+    },
+    "preview": {
+      "title": "Preview",
+      "desktop": "Desktop",
+      "mobile": "Mobile"
+    },
+    "settings": {
+      "dialog_title": "Settings",
+      "dialog_save": "Save",
+      "image_generation": "DALL-E Placeholder Image Generation",
+      "image_generation_note": "More fun with it but if you want to save money, turn it off.",
+      "openai_api_key": "OpenAI API key",
+      "openai_api_key_note": "Only stored in your browser. Never stored on servers. Overrides your .env config.",
+      "openai_base_url": "OpenAI Base URL (optional)",
+      "openai_base_url_note": "Replace with a proxy URL if you don't want to use the default.",
+      "screenshot_url": "Screenshot by URL Config",
+      "screenshot_url_note": "If you want to use URLs directly instead of taking the screenshot yourself, add a ScreenshotOne API key.",
+      "screenshot_api_key": "ScreenshotOne API key",
+      "theme_settings": "Theme Settings",
+      "app_theme": "App Theme",
+      "toggle_dark_mode": "Toggle dark mode",
+      "editor_theme": "Code Editor Theme - requires page refresh to update",
+      "get_screenshot_key": "Get 100 screenshots/mo for free"
+    },
+    "spinner": {
+      "loading": "Loading..."
+    }
+    ,
+    "termsofservice": {
+      "enter_email": "Enter your email to get started",
+      "email_placeholder": "Email",
+      "consent_text": "By providing your email, you consent to receiving occasional product updates, and you accept the ",
+      "terms_of_service": "terms of service",
+      "run_locally": "Prefer to run it yourself locally? This project is open source.",
+      "download_github": "Download the code and get started on Github.",
+      "agree_continue": "Agree & Continue",
+      "enter_email_error": "Please enter your email",
+      "logos_info": "Designers and engineers from these organizations use Screenshot to Code to build interfaces faster."
+    },
+    "urlinput": {
+      "title": "Or screenshot a URL...",
+      "placeholder": "Enter URL",
+      "capture_button": "Capture",
+      "capturing_button": "Capturing...",
+      "missing_api_key_error": "Please add a ScreenshotOne API key in the Settings dialog. This is optional - you can also drag/drop and upload images directly.",
+      "missing_url_error": "Please enter a URL",
+      "screenshot_failed_error": "Failed to capture screenshot. Look at the console and your backend logs for more details."
+    },
+    "screenRecorder": {
+        "screen_recorder": "Record Screen"
+    }
+}
+  

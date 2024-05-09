@@ -4,6 +4,7 @@ import { ScreenRecorderState } from "../../types";
 import { blobToBase64DataUrl } from "./utils";
 import fixWebmDuration from "webm-duration-fix";
 import toast from "react-hot-toast";
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   screenRecorderState: ScreenRecorderState;
@@ -19,6 +20,7 @@ function ScreenRecorder({
   setScreenRecorderState,
   generateCode,
 }: Props) {
+  const { t } = useTranslation();
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
     null
@@ -26,7 +28,6 @@ function ScreenRecorder({
   const [screenRecordingDataUrl, setScreenRecordingDataUrl] = useState<
     string | null
   >(null);
-
   const startScreenRecording = async () => {
     try {
       // Get the screen recording stream
@@ -98,7 +99,9 @@ function ScreenRecorder({
   return (
     <div className="flex items-center justify-center my-3">
       {screenRecorderState === ScreenRecorderState.INITIAL && (
-        <Button onClick={startScreenRecording}>Record Screen</Button>
+        <Button onClick={startScreenRecording}>
+          {t('screenRecorder.screen_recorder')}{' '}
+          </Button>
       )}
 
       {screenRecorderState === ScreenRecorderState.RECORDING && (

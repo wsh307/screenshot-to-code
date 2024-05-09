@@ -1,4 +1,6 @@
-import React from "react";
+// frontend/src/components/SettingsDialog.tsx
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Dialog,
   DialogClose,
@@ -7,28 +9,30 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { FaCog } from "react-icons/fa";
-import { EditorTheme, Settings } from "../types";
-import { Switch } from "./ui/switch";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "./ui/select";
-import { capitalize } from "../lib/utils";
-import { IS_RUNNING_ON_CLOUD } from "../config";
+} from '@/components/ui/dialog';
+import { FaCog } from 'react-icons/fa';
+import { EditorTheme, Settings } from '../types';
+import { Switch } from './ui/switch';
+import { Label } from './ui/label';
+import { Input } from './ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger } from './ui/select';
+import { capitalize } from '../lib/utils';
+import { IS_RUNNING_ON_CLOUD } from '../config';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./ui/accordion";
+} from './ui/accordion';
 
 interface Props {
   settings: Settings;
   setSettings: React.Dispatch<React.SetStateAction<Settings>>;
 }
 
-function SettingsDialog({ settings, setSettings }: Props) {
+const SettingsDialog: React.FC<Props> = ({ settings, setSettings }) => {
+  const { t } = useTranslation();
+
   const handleThemeChange = (theme: EditorTheme) => {
     setSettings((s) => ({
       ...s,
@@ -43,15 +47,13 @@ function SettingsDialog({ settings, setSettings }: Props) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="mb-4">Settings</DialogTitle>
+          <DialogTitle className="mb-4">{t('settings.dialog_title')}</DialogTitle>
         </DialogHeader>
 
         <div className="flex items-center space-x-2">
           <Label htmlFor="image-generation">
-            <div>DALL-E Placeholder Image Generation</div>
-            <div className="font-light mt-2">
-              More fun with it but if you want to save money, turn it off.
-            </div>
+            <div>{t('settings.image_generation')}</div>
+            <div className="font-light mt-2">{t('settings.image_generation_note')}</div>
           </Label>
           <Switch
             id="image-generation"
@@ -64,19 +66,16 @@ function SettingsDialog({ settings, setSettings }: Props) {
             }
           />
         </div>
+
         <div className="flex flex-col space-y-4">
           <Label htmlFor="openai-api-key">
-            <div>OpenAI API key</div>
-            <div className="font-light mt-2 leading-relaxed">
-              Only stored in your browser. Never stored on servers. Overrides
-              your .env config.
-            </div>
+            <div>{t('settings.openai_api_key')}</div>
+            <div className="font-light mt-2 leading-relaxed">{t('settings.openai_api_key_note')}</div>
           </Label>
-
           <Input
             id="openai-api-key"
-            placeholder="OpenAI API key"
-            value={settings.openAiApiKey || ""}
+            placeholder={t('settings.openai_api_key')}
+            value={settings.openAiApiKey || ''}
             onChange={(e) =>
               setSettings((s) => ({
                 ...s,
@@ -87,17 +86,14 @@ function SettingsDialog({ settings, setSettings }: Props) {
 
           {!IS_RUNNING_ON_CLOUD && (
             <>
-              <Label htmlFor="openai-api-key">
-                <div>OpenAI Base URL (optional)</div>
-                <div className="font-light mt-2 leading-relaxed">
-                  Replace with a proxy URL if you don't want to use the default.
-                </div>
+              <Label htmlFor="openai-base-url">
+                <div>{t('settings.openai_base_url')}</div>
+                <div className="font-light mt-2 leading-relaxed">{t('settings.openai_base_url_note')}</div>
               </Label>
-
               <Input
                 id="openai-base-url"
-                placeholder="OpenAI Base URL"
-                value={settings.openAiBaseURL || ""}
+                placeholder={t('settings.openai_base_url')}
+                value={settings.openAiBaseURL || ''}
                 onChange={(e) =>
                   setSettings((s) => ({
                     ...s,
@@ -110,27 +106,25 @@ function SettingsDialog({ settings, setSettings }: Props) {
 
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
-              <AccordionTrigger>Screenshot by URL Config</AccordionTrigger>
+              <AccordionTrigger>{t('settings.screenshot_url')}</AccordionTrigger>
               <AccordionContent>
                 <Label htmlFor="screenshot-one-api-key">
                   <div className="leading-normal font-normal text-xs">
-                    If you want to use URLs directly instead of taking the
-                    screenshot yourself, add a ScreenshotOne API key.{" "}
+                    {t('settings.screenshot_url_note')}{' '}
                     <a
                       href="https://screenshotone.com?via=screenshot-to-code"
                       className="underline"
                       target="_blank"
                     >
-                      Get 100 screenshots/mo for free.
+                      {t('settings.get_screenshot_key')}
                     </a>
                   </div>
                 </Label>
-
                 <Input
                   id="screenshot-one-api-key"
                   className="mt-2"
-                  placeholder="ScreenshotOne API key"
-                  value={settings.screenshotOneApiKey || ""}
+                  placeholder={t('settings.screenshot_api_key')}
+                  value={settings.screenshotOneApiKey || ''}
                   onChange={(e) =>
                     setSettings((s) => ({
                       ...s,
@@ -143,43 +137,39 @@ function SettingsDialog({ settings, setSettings }: Props) {
           </Accordion>
 
           <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>Theme Settings</AccordionTrigger>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>{t('settings.theme_settings')}</AccordionTrigger>
               <AccordionContent className="space-y-4 flex flex-col">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="app-theme">
-                    <div>App Theme</div>
+                    <div>{t('settings.app_theme')}</div>
                   </Label>
                   <div>
                     <button
                       className="flex rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50t"
                       onClick={() => {
                         document
-                          .querySelector("div.mt-2")
-                          ?.classList.toggle("dark"); // enable dark mode for sidebar
-                        document.body.classList.toggle("dark");
+                          .querySelector('div.mt-2')
+                          ?.classList.toggle('dark'); // enable dark mode for sidebar
+                        document.body.classList.toggle('dark');
                         document
                           .querySelector('div[role="presentation"]')
-                          ?.classList.toggle("dark"); // enable dark mode for upload container
+                          ?.classList.toggle('dark'); // enable dark mode for upload container
                       }}
                     >
-                      Toggle dark mode
+                      {t('settings.toggle_dark_mode')}
                     </button>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
                   <Label htmlFor="editor-theme">
-                    <div>
-                      Code Editor Theme - requires page refresh to update
-                    </div>
+                    <div>{t('settings.editor_theme')}</div>
                   </Label>
                   <div>
-                    <Select // Use the custom Select component here
+                    <Select
                       name="editor-theme"
                       value={settings.editorTheme}
-                      onValueChange={(value) =>
-                        handleThemeChange(value as EditorTheme)
-                      }
+                      onValueChange={(value) => handleThemeChange(value as EditorTheme)}
                     >
                       <SelectTrigger className="w-[180px]">
                         {capitalize(settings.editorTheme)}
@@ -197,11 +187,11 @@ function SettingsDialog({ settings, setSettings }: Props) {
         </div>
 
         <DialogFooter>
-          <DialogClose>Save</DialogClose>
+          <DialogClose>{t('settings.dialog_save')}</DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
-}
+};
 
 export default SettingsDialog;

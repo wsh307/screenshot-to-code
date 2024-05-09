@@ -1,0 +1,37 @@
+/* frontend/src/components/LanguageSelector.css */
+.acss-yk1wp5 {
+    color: white;
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    position: relative; /* Added to control the positioning of children absolutely */
+  }
+  
+  .acss-1nbrequ {
+    position: absolute; /* Changed to absolute for overlapping */
+    background-color: transparent; /* Set to transparent, will override in .active */
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    user-select: none; /* Prevents text selection */
+    transition: all 0.3s ease; /* Smooth transition for overlapping effect */
+  }
+  
+  .active {
+    background-color: black; /* Active language has a black background */
+    z-index: 10; /* Ensures it is on top */
+  }
+  
+  .inactive {
+    color: white; /* Inactive language uses white color to stay visible */
+    z-index: 5; /* Lower z-index */
+  }

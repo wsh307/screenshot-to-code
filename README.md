@@ -1,4 +1,10 @@
+<div style="text-align:center;">
+
 # screenshot-to-code
+
+English / [简体中文](./README_CN.md)
+
+</div>
 
 A simple tool to convert screenshots, mockups and Figma designs into clean, functional code using AI.
 

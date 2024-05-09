@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Button } from "./ui/button";
+// frontend/src/components/ImportCodeSection.tsx
+import { useState } from 'react';
+import { Button } from './ui/button';
 import {
   Dialog,
   DialogContent,
@@ -8,62 +9,64 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
-import { Textarea } from "./ui/textarea";
-import OutputSettingsSection from "./OutputSettingsSection";
-import toast from "react-hot-toast";
-import { Stack } from "../lib/stacks";
+} from './ui/dialog';
+import { Textarea } from './ui/textarea';
+import OutputSettingsSection from './OutputSettingsSection';
+import toast from 'react-hot-toast';
+import { Stack } from '../lib/stacks';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   importFromCode: (code: string, stack: Stack) => void;
 }
 
 function ImportCodeSection({ importFromCode }: Props) {
-  const [code, setCode] = useState("");
+  const { t } = useTranslation();
+  const [code, setCode] = useState('');
   const [stack, setStack] = useState<Stack | undefined>(undefined);
 
   const doImport = () => {
-    if (code === "") {
-      toast.error("Please paste in some code");
+    if (code === '') {
+      toast.error(t('importcode.error_empty_code'));
       return;
     }
 
     if (stack === undefined) {
-      toast.error("Please select your stack");
+      toast.error(t('importcode.error_select_stack'));
       return;
     }
 
     importFromCode(code, stack);
   };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary">Import from Code</Button>
+        <Button variant='secondary'>{t('importcode.trigger_button')}</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
-          <DialogTitle>Paste in your HTML code</DialogTitle>
-          <DialogDescription>
-            Make sure that the code you're importing is valid HTML.
-          </DialogDescription>
+          <DialogTitle>{t('importcode.dialog_title')}</DialogTitle>
+          <DialogDescription>{t('importcode.dialog_description')}</DialogDescription>
         </DialogHeader>
 
         <Textarea
           value={code}
           onChange={(e) => setCode(e.target.value)}
-          className="w-full h-64"
+          className='w-full h-64'
+          placeholder={t('importcode.textarea_placeholder')}
         />
 
         <OutputSettingsSection
           stack={stack}
           setStack={(config: Stack) => setStack(config)}
-          label="Stack:"
+          label='Stack:'
           shouldDisableUpdates={false}
         />
 
         <DialogFooter>
-          <Button type="submit" onClick={doImport}>
-            Import
+          <Button type='submit' onClick={doImport}>
+            {t('importcode.import_button')}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -1,15 +1,17 @@
+// frontend/src/components/ModelSettingsSection.tsx
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
-} from "./ui/select";
+} from './ui/select';
 import {
   CODE_GENERATION_MODEL_DESCRIPTIONS,
   CodeGenerationModel,
-} from "../lib/models";
-import { Badge } from "./ui/badge";
+} from '../lib/models';
+import { Badge } from './ui/badge';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   codeGenerationModel: CodeGenerationModel;
@@ -22,10 +24,12 @@ function ModelSettingsSection({
   setCodeGenerationModel,
   shouldDisableUpdates = false,
 }: Props) {
+  const { t } = useTranslation();
+
   return (
-    <div className="flex flex-col gap-y-2 justify-between text-sm">
-      <div className="grid grid-cols-3 items-center gap-4">
-        <span>AI Model:</span>
+    <div className='flex flex-col gap-y-2 justify-between text-sm'>
+      <div className='grid grid-cols-3 items-center gap-4'>
+        <span>{t('modelsettings.ai_model')}:</span>
         <Select
           value={codeGenerationModel}
           onValueChange={(value: string) =>
@@ -33,8 +37,8 @@ function ModelSettingsSection({
           }
           disabled={shouldDisableUpdates}
         >
-          <SelectTrigger className="col-span-2" id="output-settings-js">
-            <span className="font-semibold">
+          <SelectTrigger className='col-span-2' id='output-settings-js'>
+            <span className='font-semibold'>
               {CODE_GENERATION_MODEL_DESCRIPTIONS[codeGenerationModel].name}
             </span>
           </SelectTrigger>
@@ -42,13 +46,13 @@ function ModelSettingsSection({
             <SelectGroup>
               {Object.values(CodeGenerationModel).map((model) => (
                 <SelectItem key={model} value={model}>
-                  <div className="flex items-center">
-                    <span className="font-semibold">
+                  <div className='flex items-center'>
+                    <span className='font-semibold'>
                       {CODE_GENERATION_MODEL_DESCRIPTIONS[model].name}
                     </span>
                     {CODE_GENERATION_MODEL_DESCRIPTIONS[model].inBeta && (
-                      <Badge className="ml-2" variant="secondary">
-                        Beta
+                      <Badge className='ml-2' variant='secondary'>
+                        {t('modelsettings.beta_label')}
                       </Badge>
                     )}
                   </div>

@@ -1,46 +1,45 @@
-import { useState, useEffect, useMemo } from "react";
-// useCallback
-import { useDropzone } from "react-dropzone";
-// import { PromptImage } from "../../../types";
-import { toast } from "react-hot-toast";
-import { URLS } from "../urls";
-import { Badge } from "./ui/badge";
-import ScreenRecorder from "./recording/ScreenRecorder";
-import { ScreenRecorderState } from "../types";
+// frontend/src/components/ImageUpload.tsx
+import { useState, useEffect, useMemo, CSSProperties } from 'react';
+import { useDropzone } from 'react-dropzone';
+import { toast } from 'react-hot-toast';
+import { URLS } from '../urls';
+import { Badge } from './ui/badge';
+import ScreenRecorder from './recording/ScreenRecorder';
+import { ScreenRecorderState } from '../types';
+import { useTranslation } from 'react-i18next';
 
-const baseStyle = {
+const baseStyle: CSSProperties = {
   flex: 1,
-  width: "80%",
-  margin: "0 auto",
-  minHeight: "400px",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  padding: "20px",
+  width: '80%',
+  margin: '0 auto',
+  minHeight: '400px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '20px',
   borderWidth: 2,
   borderRadius: 2,
-  borderColor: "#eeeeee",
-  borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#bdbdbd",
-  outline: "none",
-  transition: "border .24s ease-in-out",
+  borderColor: '#eeeeee',
+  borderStyle: 'dashed',
+  backgroundColor: '#fafafa',
+  color: '#bdbdbd',
+  outline: 'none',
+  transition: 'border .24s ease-in-out',
 };
 
-const focusedStyle = {
-  borderColor: "#2196f3",
+const focusedStyle: CSSProperties = {
+  borderColor: '#2196f3',
 };
 
-const acceptStyle = {
-  borderColor: "#00e676",
+const acceptStyle: CSSProperties = {
+  borderColor: '#00e676',
 };
 
-const rejectStyle = {
-  borderColor: "#ff1744",
+const rejectStyle: CSSProperties = {
+  borderColor: '#ff1744',
 };
 
-// TODO: Move to a separate file
 function fileToDataURL(file: File) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -57,13 +56,13 @@ type FileWithPreview = {
 interface Props {
   setReferenceImages: (
     referenceImages: string[],
-    inputMode: "image" | "video"
+    inputMode: 'image' | 'video'
   ) => void;
 }
 
 function ImageUpload({ setReferenceImages }: Props) {
+  const { t } = useTranslation();
   const [files, setFiles] = useState<FileWithPreview[]>([]);
-  // TODO: Switch to Zustand
   const [screenRecorderState, setScreenRecorderState] =
     useState<ScreenRecorderState>(ScreenRecorderState.INITIAL);
 
@@ -72,17 +71,14 @@ function ImageUpload({ setReferenceImages }: Props) {
       maxFiles: 1,
       maxSize: 1024 * 1024 * 20, // 20 MB
       accept: {
-        // Image formats
-        "image/png": [".png"],
-        "image/jpeg": [".jpeg"],
-        "image/jpg": [".jpg"],
-        // Video formats
-        "video/quicktime": [".mov"],
-        "video/mp4": [".mp4"],
-        "video/webm": [".webm"],
+        'image/png': ['.png'],
+        'image/jpeg': ['.jpeg'],
+        'image/jpg': ['.jpg'],
+        'video/quicktime': ['.mov'],
+        'video/mp4': ['.mp4'],
+        'video/webm': ['.webm'],
       },
       onDrop: (acceptedFiles) => {
-        // Set up the preview thumbnail images
         setFiles(
           acceptedFiles.map((file: File) =>
             Object.assign(file, {
@@ -91,21 +87,20 @@ function ImageUpload({ setReferenceImages }: Props) {
           ) as FileWithPreview[]
         );
 
-        // Convert images to data URLs and set the prompt images state
         Promise.all(acceptedFiles.map((file) => fileToDataURL(file)))
           .then((dataUrls) => {
             if (dataUrls.length > 0) {
               setReferenceImages(
                 dataUrls.map((dataUrl) => dataUrl as string),
-                (dataUrls[0] as string).startsWith("data:video")
-                  ? "video"
-                  : "image"
+                (dataUrls[0] as string).startsWith('data:video')
+                  ? 'video'
+                  : 'image'
               );
             }
           })
           .catch((error) => {
-            toast.error("Error reading files" + error);
-            console.error("Error reading files:", error);
+            toast.error('Error reading files' + error);
+            console.error('Error reading files:', error);
           });
       },
       onDropRejected: (rejectedFiles) => {
@@ -113,43 +108,9 @@ function ImageUpload({ setReferenceImages }: Props) {
       },
     });
 
-  // const pasteEvent = useCallback(
-  //   (event: ClipboardEvent) => {
-  //     const clipboardData = event.clipboardData;
-  //     if (!clipboardData) return;
-
-  //     const items = clipboardData.items;
-  //     const files = [];
-  //     for (let i = 0; i < items.length; i++) {
-  //       const file = items[i].getAsFile();
-  //       if (file && file.type.startsWith("image/")) {
-  //         files.push(file);
-  //       }
-  //     }
-
-  //     // Convert images to data URLs and set the prompt images state
-  //     Promise.all(files.map((file) => fileToDataURL(file)))
-  //       .then((dataUrls) => {
-  //         if (dataUrls.length > 0) {
-  //           setReferenceImages(dataUrls.map((dataUrl) => dataUrl as string));
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         // TODO: Display error to user
-  //         console.error("Error reading files:", error);
-  //       });
-  //   },
-  //   [setReferenceImages]
-  // );
-
-  // TODO: Make sure we don't listen to paste events in text input components
-  // useEffect(() => {
-  //   window.addEventListener("paste", pasteEvent);
-  // }, [pasteEvent]);
-
   useEffect(() => {
     return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
-  }, [files]); // Added files as a dependency
+  }, [files]);
 
   const style = useMemo(
     () => ({
@@ -162,27 +123,23 @@ function ImageUpload({ setReferenceImages }: Props) {
   );
 
   return (
-    <section className="container">
+    <section className='container'>
       {screenRecorderState === ScreenRecorderState.INITIAL && (
-        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-        <div {...getRootProps({ style: style as any })}>
+        <div {...getRootProps({ style })}>
           <input {...getInputProps()} />
-          <p className="text-slate-700 text-lg">
-            Drag & drop a screenshot here, <br />
-            or click to upload
-          </p>
+          <p className='text-slate-700 text-lg'>{t('imageupload.upload_prompt')}</p>
         </div>
       )}
       {screenRecorderState === ScreenRecorderState.INITIAL && (
-        <div className="text-center text-sm text-slate-800 mt-4">
-          <Badge>New!</Badge> Upload a screen recording (.mp4, .mov) or record
-          your screen to clone a whole app (experimental).{" "}
+        <div className='text-center text-sm text-slate-800 mt-4'>
+          <Badge>{t('imageupload.new')}</Badge>{' '}
+          {t('imageupload.upload_video')}{' '}
           <a
-            className="underline"
-            href={URLS["intro-to-video"]}
-            target="_blank"
+            className='underline'
+            href={URLS['intro-to-video']}
+            target='_blank'
           >
-            Learn more.
+            {t('imageupload.learn_more')}
           </a>
         </div>
       )}
