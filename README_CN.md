@@ -1,4 +1,4 @@
-<div style="text-align:center;">
+<div align="center">
 
 # 屏幕截图转代码
 
