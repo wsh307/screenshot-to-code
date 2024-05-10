@@ -9,7 +9,8 @@
         "include_result_image": "Include screenshot of current version?",
         "update_instruction_placeholder": "Tell the AI what to change...",
         "update": "Update",
-        "regenerate": "Regenerate"
+        "regenerate": "Regenerate",
+        "cancel": "Cancel"
     },
     "codetab": {
       "copy_code": "Copy Code",

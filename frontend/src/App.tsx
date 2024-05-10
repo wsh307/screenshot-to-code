@@ -445,7 +445,7 @@ function App() {
                       onClick={cancelCodeGeneration}
                       className='w-full dark:text-white dark:bg-gray-700'
                     >
-                      Cancel
+                     {t('app.cancel')}
                     </Button>
                   </div>
                 </div>

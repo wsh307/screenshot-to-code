@@ -9,7 +9,8 @@
         "include_result_image": "包含当前版本的截图？",
         "update_instruction_placeholder": "告诉 AI 需要更改什么...",
         "update": "更新",
-        "regenerate": "重新生成"
+        "regenerate": "重新生成",
+        "cancel": "取消"
       },
     "codetab": {
       "copy_code": "复制代码",
