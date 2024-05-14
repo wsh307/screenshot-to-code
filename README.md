@@ -6,7 +6,7 @@ English / [简体中文](./README_CN.md)
 
 </div>
 
-A simple tool to convert screenshots, mockups and Figma designs into clean, functional code using AI.
+A simple tool to convert screenshots, mockups and Figma designs into clean, functional code using AI. **Now supporting GPT-4O!**
 
 https://github.com/abi/screenshot-to-code/assets/23818/6cebadae-2fe3-4986-ac6a-8fb9db030045
 
@@ -21,9 +21,10 @@ Supported stacks:
 
 Supported AI models:
 
-- GPT-4 Turbo (Apr 2024) - Best model
-- GPT-4 Vision (Nov 2023) - Good model that's better than GPT-4 Turbo on some inputs
-- Claude 3 Sonnet - Faster, and on par or better than GPT-4 vision for many inputs
+- GPT-4O - Best model!
+- GPT-4 Turbo (Apr 2024)
+- GPT-4 Vision (Nov 2023)
+- Claude 3 Sonnet
 - DALL-E 3 for image generation
 
 See the [Examples](#-examples) section below for more demos.

@@ -5,7 +5,7 @@
 简体中文 / [English](./README.md)
 
 </div>
-一个简单的工具，使用AI将屏幕截图、模型和Figma设计转换成干净、功能性的代码。
+一个简单的工具，使用AI将屏幕截图、模型和Figma设计转换成干净、功能性的代码。现在支持gpt-4O
 
 https://github.com/abi/screenshot-to-code/assets/23818/6cebadae-2fe3-4986-ac6a-8fb9db030045
 
@@ -20,9 +20,10 @@ https://github.com/abi/screenshot-to-code/assets/23818/6cebadae-2fe3-4986-ac6a-8
 
 支持的AI模型：
 
-- GPT-4 Turbo (2024年4月) - 最佳模型
-- GPT-4 Vision (2023年11月) - 在某些输入上比GPT-4 Turbo更好的模型
-- Claude 3 Sonnet - 更快，且在许多输入上与GPT-4 Vision相当或更好
+- GPT-4O - Best model!
+- GPT-4 Turbo (Apr 2024)
+- GPT-4 Vision (Nov 2023)
+- Claude 3 Sonnet
 - DALL-E 3 用于图像生成
 
 查看[示例](#-示例)部分以下了解更多演示。

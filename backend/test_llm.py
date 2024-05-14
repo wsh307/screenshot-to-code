@@ -24,6 +24,11 @@ class TestConvertFrontendStrToLlm(unittest.TestCase):
             Llm.GPT_4_TURBO_2024_04_09,
             "Should convert 'gpt-4-turbo-2024-04-09' to Llm.GPT_4_TURBO_2024_04_09",
         )
+        self.assertEqual(
+            convert_frontend_str_to_llm("gpt-4-turbo-2024-04-09"),
+            Llm.GPT_4_TURBO_2024_04_09,
+            "Should convert 'gpt-4-turbo-2024-04-09' to Llm.GPT_4_TURBO_2024_04_09",
+        )
 
     def test_convert_invalid_string_raises_exception(self):
         with self.assertRaises(ValueError):
