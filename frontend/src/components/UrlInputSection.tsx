@@ -64,7 +64,7 @@ export function UrlInputSection({ doCreate, screenshotOneApiKey }: Props) {
         onChange={(e) => setReferenceUrl(e.target.value)}
         value={referenceUrl}
       />
-      <Button onClick={takeScreenshot} disabled={isLoading} className='bg-slate-400'>
+      <Button onClick={takeScreenshot} disabled={isLoading} className="bg-slate-400 capture-btn">
         {isLoading ? t('urlinput.capturing_button') : t('urlinput.capture_button')}
       </Button>
     </div>

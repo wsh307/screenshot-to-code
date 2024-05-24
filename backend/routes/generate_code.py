@@ -85,7 +85,7 @@ async def stream_code(websocket: WebSocket):
 
     # Read the model from the request. Fall back to default if not provided.
     code_generation_model_str = params.get(
-        "codeGenerationModel", Llm.GPT_4O_2024_05_13.value
+       "codeGenerationModel", Llm.GPT_4O_2024_05_13.value
     )
     try:
         code_generation_model = convert_frontend_str_to_llm(code_generation_model_str)

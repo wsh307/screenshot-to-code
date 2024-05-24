@@ -36,6 +36,9 @@ https://github.com/abi/screenshot-to-code/assets/23818/6cebadae-2fe3-4986-ac6a-8
 
 [在Twitter上关注我获取更新](https://twitter.com/_abi_).
 
+赞助商
+<a href="https://platform.sh/try-it-now/?utm_source=fastapi-signup&utm_medium=banner&utm_campaign=FastAPI-signup-June-2023" target="_blank" title="在现代、可靠和安全的 PaaS 上构建、运行和扩展您的应用。"><img src="https://fastapi.tiangolo.com/img/sponsors/platform-sh.png"></a>
+
 ## 🚀 无需安装即可试用
 
 [在托管版本上试用（收费）](https://screenshottocode.com).

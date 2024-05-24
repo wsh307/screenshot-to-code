@@ -89,7 +89,8 @@ function App() {
     selectedCodeGenerationModel ===
       CodeGenerationModel.GPT_4_TURBO_2024_04_09 &&
     settings.generatedCodeConfig === Stack.REACT_TAILWIND;
-    const showGpt4OMessage =
+
+  const showGpt4OMessage =
     selectedCodeGenerationModel !== CodeGenerationModel.GPT_4O_2024_05_13 &&
     appState === AppState.INITIAL;
   // Indicate coding state using the browser tab's favicon and title
@@ -402,16 +403,17 @@ function App() {
           />
 
           {showReactWarning && (
-            <div className='text-sm bg-yellow-200 rounded p-2'>
+            <div className="text-sm bg-yellow-200 rounded p-2">
               Sorry - React is not currently working with GPT-4 Turbo. Please
               use GPT-4 Vision or Claude Sonnet. We are working on a fix.
             </div>
           )}
+
           {showGpt4OMessage && (
             <div className="rounded-lg p-2 bg-fuchsia-200">
               <p className="text-gray-800 text-sm">
                 Now supporting GPT-4o. Higher quality and 2x faster. Give it a
-                try!
+                try!  
               </p>
             </div>
           )}
@@ -481,7 +483,7 @@ function App() {
                     </div>
                     <Button
                       onClick={doUpdate}
-                      className='dark:text-white dark:bg-gray-700'
+                      className='dark:text-white dark:bg-gray-700 update-btn'
                     >
                       {t('app.update')}
                     </Button>
@@ -489,7 +491,7 @@ function App() {
                   <div className='flex items-center justify-end gap-x-2 mt-2'>
                     <Button
                       onClick={regenerate}
-                      className='flex items-center gap-x-2 dark:text-white dark:bg-gray-700'
+                      className="flex items-center gap-x-2 dark:text-white dark:bg-gray-700 regenerate-btn"
                     >
                       🔄 {t('app.regenerate')}
                     </Button>
@@ -589,7 +591,7 @@ function App() {
                       <Button
                         onClick={downloadCode}
                         variant='secondary'
-                        className='flex items-center gap-x-2 mr-4 dark:text-white dark:bg-gray-700'
+                        className='flex items-center gap-x-2 mr-4 dark:text-white dark:bg-gray-700 download-btn'
                       >
                         <FaDownload /> {t('app.download')}
                       </Button>

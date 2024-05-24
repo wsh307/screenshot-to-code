@@ -42,7 +42,9 @@ function ImportCodeSection({ importFromCode }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant='secondary'>{t('importcode.trigger_button')}</Button>
+      <Button className="import-from-code-btn" variant="secondary">
+        {t('importcode.trigger_button')}
+        </Button>
       </DialogTrigger>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
@@ -65,7 +67,7 @@ function ImportCodeSection({ importFromCode }: Props) {
         />
 
         <DialogFooter>
-          <Button type='submit' onClick={doImport}>
+        <Button className="import-btn" type="submit" onClick={doImport}>
             {t('importcode.import_button')}
           </Button>
         </DialogFooter>

@@ -126,7 +126,7 @@ function ImageUpload({ setReferenceImages }: Props) {
     <section className='container'>
       {screenRecorderState === ScreenRecorderState.INITIAL && (
         <div {...getRootProps({ style })}>
-          <input {...getInputProps()} />
+          <input {...getInputProps()} className="file-input" />
           <p className='text-slate-700 text-lg'>{t('imageupload.upload_prompt')}</p>
         </div>
       )}
