@@ -85,7 +85,7 @@ async def stream_code(websocket: WebSocket):
 
     # Read the model from the request. Fall back to default if not provided.
     code_generation_model_str = params.get(
-       "codeGenerationModel", Llm.GPT_4O_2024_05_13.value
+        "codeGenerationModel", Llm.GPT_4O_2024_05_13.value
     )
     try:
         code_generation_model = convert_frontend_str_to_llm(code_generation_model_str)
@@ -119,6 +119,17 @@ async def stream_code(websocket: WebSocket):
             "No OpenAI API key found. Please add your API key in the settings dialog or add it to backend/.env file. If you add it to .env, make sure to restart the backend server."
         )
         return
+
+    # Get the Anthropic API key from the request. Fall back to environment variable if not provided.
+    # If neither is provided, we throw an error later only if Claude is used.
+    anthropic_api_key = None
+    if "anthropicApiKey" in params and params["anthropicApiKey"]:
+        anthropic_api_key = params["anthropicApiKey"]
+        print("Using Anthropic API key from client-side settings dialog")
+    else:
+        anthropic_api_key = ANTHROPIC_API_KEY
+        if anthropic_api_key:
+            print("Using Anthropic API key from environment variable")
 
     # Get the OpenAI Base URL from the request. Fall back to environment variable if not provided.
     openai_base_url = None
@@ -219,31 +230,31 @@ async def stream_code(websocket: WebSocket):
     else:
         try:
             if validated_input_mode == "video":
-                if not ANTHROPIC_API_KEY:
+                if not anthropic_api_key:
                     await throw_error(
-                        "Video only works with Anthropic models. No Anthropic API key found. Please add the environment variable ANTHROPIC_API_KEY to backend/.env"
+                        "Video only works with Anthropic models. No Anthropic API key found. Please add the environment variable ANTHROPIC_API_KEY to backend/.env or in the settings dialog"
                     )
                     raise Exception("No Anthropic key")
 
                 completion = await stream_claude_response_native(
                     system_prompt=VIDEO_PROMPT,
                     messages=prompt_messages,  # type: ignore
-                    api_key=ANTHROPIC_API_KEY,
+                    api_key=anthropic_api_key,
                     callback=lambda x: process_chunk(x),
                     model=Llm.CLAUDE_3_OPUS,
                     include_thinking=True,
                 )
                 exact_llm_version = Llm.CLAUDE_3_OPUS
             elif code_generation_model == Llm.CLAUDE_3_SONNET:
-                if not ANTHROPIC_API_KEY:
+                if not anthropic_api_key:
                     await throw_error(
-                        "No Anthropic API key found. Please add the environment variable ANTHROPIC_API_KEY to backend/.env"
+                        "No Anthropic API key found. Please add the environment variable ANTHROPIC_API_KEY to backend/.env or in the settings dialog"
                     )
                     raise Exception("No Anthropic key")
 
                 completion = await stream_claude_response(
                     prompt_messages,  # type: ignore
-                    api_key=ANTHROPIC_API_KEY,
+                    api_key=anthropic_api_key,
                     callback=lambda x: process_chunk(x),
                 )
                 exact_llm_version = code_generation_model

@@ -53,7 +53,7 @@ const SettingsDialog: React.FC<Props> = ({ settings, setSettings }) => {
         <div className="flex items-center space-x-2">
           <Label htmlFor="image-generation">
             <div>{t('settings.image_generation')}</div>
-            <div className="font-light mt-2">{t('settings.image_generation_note')}</div>
+            <div className="font-light mt-2 text-xs">{t('settings.image_generation_note')}</div>
           </Label>
           <Switch
             id="image-generation"
@@ -66,26 +66,29 @@ const SettingsDialog: React.FC<Props> = ({ settings, setSettings }) => {
             }
           />
         </div>
-
-        <div className="flex flex-col space-y-4">
-          <Label htmlFor="openai-api-key">
-            <div>{t('settings.openai_api_key')}</div>
-            <div className="font-light mt-2 leading-relaxed">{t('settings.openai_api_key_note')}</div>
-          </Label>
-          <Input
-            id="openai-api-key"
-            placeholder={t('settings.openai_api_key')}
-            value={settings.openAiApiKey || ''}
-            onChange={(e) =>
-              setSettings((s) => ({
-                ...s,
-                openAiApiKey: e.target.value,
-              }))
-            }
-          />
+        <div className="flex flex-col space-y-6">
+          <div>
+            <Label htmlFor="openai-api-key">
+              <div>{t('settings.openai_api_key')}</div>
+              <div className="font-light mt-1 mb-2 text-xs leading-relaxed">
+              {t('settings.openai_api_key_note')}
+              </div>
+            </Label>
+            <Input
+              id="openai-api-key"
+              placeholder="OpenAI API key"
+              value={settings.openAiApiKey || ""}
+              onChange={(e) =>
+                setSettings((s) => ({
+                  ...s,
+                  openAiApiKey: e.target.value,
+                }))
+              }
+            />
+          </div>
 
           {!IS_RUNNING_ON_CLOUD && (
-            <>
+            <div>
               <Label htmlFor="openai-base-url">
                 <div>{t('settings.openai_base_url')}</div>
                 <div className="font-light mt-2 leading-relaxed">{t('settings.openai_base_url_note')}</div>
@@ -101,9 +104,29 @@ const SettingsDialog: React.FC<Props> = ({ settings, setSettings }) => {
                   }))
                 }
               />
-            </>
+            </div>
           )}
+          <div>
+            <Label htmlFor="anthropic-api-key">
+              <div>Anthropic API key</div>
+              <div className="font-light mt-1 text-xs leading-relaxed">
+                Only stored in your browser. Never stored on servers. Overrides
+                your .env config.
+              </div>
+            </Label>
 
+            <Input
+              id="anthropic-api-key"
+              placeholder="Anthropic API key"
+              value={settings.anthropicApiKey || ""}
+              onChange={(e) =>
+                setSettings((s) => ({
+                  ...s,
+                  anthropicApiKey: e.target.value,
+                }))
+              }
+            />
+          </div>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
               <AccordionTrigger>{t('settings.screenshot_url')}</AccordionTrigger>
