@@ -9,6 +9,8 @@
 
 https://github.com/abi/screenshot-to-code/assets/23818/6cebadae-2fe3-4986-ac6a-8fb9db030045
 
+国际化分支
+
 支持的技术栈：
 
 - HTML + Tailwind
